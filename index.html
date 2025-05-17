@@ -71,3 +71,86 @@
 
 </body>
 </html>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Test </title>
+</head>
+<body>
+  <h1>DUYURU!</h1>
+  <h2>Merhaba!</h2>
+  <p>Bu daha başlangıç!.</p>
+  <p><b>@alperwn1903 :D</b></p>
+
+  <br><br>
+
+  <!-- Buton -->
+  <button onclick="duyuruGoster()">Tıkla</button>
+
+  <script>
+    function duyuruGoster() {
+      alert("Bu daha başlangıç! 🎉");
+    }
+  </script>
+
+  <!-- 🔢 Hesap Makinesi -->
+  <section style="margin-top: 50px; padding: 20px; border-top: 1px solid #ccc;">
+    <h2>Hesap Makinesi</h2>
+
+    <input type="text" id="sayi1" placeholder="1. Sayı">
+    <select id="islem">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+    </select>
+    <input type="text" id="sayi2" placeholder="2. Sayı">
+    <button onclick="hesapla()">Hesapla</button>
+
+    <h3 id="sonuc"></h3>
+  </section>
+
+  <script>
+    function hesapla() {
+      let s1 = document.getElementById("sayi1").value;
+      let s2 = document.getElementById("sayi2").value;
+      let islem = document.getElementById("islem").value;
+
+      if (isNaN(s1) || isNaN(s2) || s1 === "" || s2 === "") {
+        document.getElementById("sonuc").innerText = "Lütfen geçerli sayılar girin.";
+        return;
+      }
+
+      let sayi1 = parseInt(s1);
+      let sayi2 = parseInt(s2);
+      let sonuc;
+
+      if (islem === "+") sonuc = sayi1 + sayi2;
+      else if (islem === "-") sonuc = sayi1 - sayi2;
+      else if (islem === "*") sonuc = sayi1 * sayi2;
+      else if (islem === "/") {
+        if (sayi2 === 0) {
+          sonuc = "Sıfıra bölünemez!";
+        } else {
+          sonuc = sayi1 / sayi2;
+        }
+      } else {
+        sonuc = "Geçersiz işlem!";
+      }
+
+      document.getElementById("sonuc").innerText = "Sonuç: " + sonuc;
+    }
+  </script>
+
+</body>
+</html>
+<div style="
+  background-color: #000;
+  color: #fff;
+  padding: 15px;
+  font-size: 12px;
+  font-family: monospace;
+  margin-top: 40px;
+">
+  azcıkta olsa chatgpt yardımıyla- @alperwn1903  
+</div>
