@@ -11,31 +11,31 @@
 
   <br><br>
 
-  <!-- Burada Buton -->
+  <!-- Buton -->
   <button onclick="duyuruGoster()">Tıkla</button>
 
-  <!-- JavaScript ile butona tepki -->
   <script>
     function duyuruGoster() {
       alert("Bu daha başlangıç! 🎉");
     }
   </script>
-</body>
-</html>
-<section style="margin-top: 50px; padding: 20px; border-top: 1px solid #ccc;">
-  <h2>Hesap Makinesi</h2>
 
-  <input type="text" id="sayi1" placeholder="1. Sayı">
-  <select id="islem">
-    <option value="+">+</option>
-    <option value="-">-</option>
-    <option value="*">*</option>
-    <option value="/">/</option>
-  </select>
-  <input type="text" id="sayi2" placeholder="2. Sayı">
-  <button onclick="hesapla()">Hesapla</button>
+  <!-- 🔢 Hesap Makinesi -->
+  <section style="margin-top: 50px; padding: 20px; border-top: 1px solid #ccc;">
+    <h2>Hesap Makinesi</h2>
 
-  <h3 id="sonuc"></h3>
+    <input type="text" id="sayi1" placeholder="1. Sayı">
+    <select id="islem">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+    </select>
+    <input type="text" id="sayi2" placeholder="2. Sayı">
+    <button onclick="hesapla()">Hesapla</button>
+
+    <h3 id="sonuc"></h3>
+  </section>
 
   <script>
     function hesapla() {
@@ -68,5 +68,6 @@
       document.getElementById("sonuc").innerText = "Sonuç: " + sonuc;
     }
   </script>
-</section>
+
 </body>
+</html>
