@@ -1,15 +1,65 @@
 <!DOCTYPE html>
-<html>
+<html lang="tr">
 <head>
+  <meta charset="UTF-8">
   <title>Test</title>
+  <style>
+    body {
+      background-color: white;
+      color: black;
+      font-family: Arial, sans-serif;
+      transition: 0.3s;
+    }
+
+    .dark-mode {
+      background-color: #121212;
+      color: white;
+    }
+
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      padding: 8px 12px;
+      background-color: #444;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 20px;
+    }
+
+    .hesap-container {
+      margin-top: 50px;
+      padding: 20px;
+      border-top: 1px solid #ccc;
+    }
+
+    input, select, button {
+      margin: 5px;
+    }
+
+    .footer-box {
+      background-color: #000;
+      color: #fff;
+      padding: 15px;
+      font-size: 12px;
+      font-family: monospace;
+      margin-top: 40px;
+    }
+  </style>
 </head>
 <body>
 
+  <!-- Tema Değiştirici Buton -->
+  <button class="theme-toggle" onclick="temaDegistir()" id="temaButon">🌞</button>
+
+  <!-- Duyuru -->
   <h1>DUYURU!</h1>
   <h2>Merhaba!</h2>
   <p>Bu daha başlangıç!.</p>
   <p><b>@alperwn1903 :D</b></p>
-
+  <br>
   <button onclick="duyuruGoster()">Tıkla</button>
 
   <script>
@@ -19,20 +69,21 @@
   </script>
 
   <!-- Hesap Makinesi -->
-  <section><section style="margin-top: 50px; padding: 20px; border-top: 1px solid #ccc;">
-  <h2>Hesap Makinesi</h2>
+  <section class="hesap-container">
+    <h2>Hesap Makinesi</h2>
 
-  <input type="text" id="sayi1" placeholder="1. Sayı">
-  <select id="islem">
-    <option value="+">+</option>
-    <option value="-">-</option>
-    <option value="*">*</option>
-    <option value="/">/</option>
-  </select>
-  <input type="text" id="sayi2" placeholder="2. Sayı">
-  <button onclick="hesapla()">Hesapla</button>
+    <input type="text" id="sayi1" placeholder="1. Sayı">
+    <select id="islem">
+      <option value="+">+</option>
+      <option value="-">-</option>
+      <option value="*">*</option>
+      <option value="/">/</option>
+    </select>
+    <input type="text" id="sayi2" placeholder="2. Sayı">
+    <button onclick="hesapla()">Hesapla</button>
 
-  <h3 id="sonuc"></h3>
+    <h3 id="sonuc"></h3>
+  </section>
 
   <script>
     function hesapla() {
@@ -65,13 +116,29 @@
       document.getElementById("sonuc").innerText = "Sonuç: " + sonuc;
     }
   </script>
-</section>
-</section>
-<!--hesap makinesi kod satırı sonu --!>
-  <!-- Siyah kutu -->
-  <div style="background-color:#000; color:#fff; font-size:12px; padding:10px; font-family:monospace;">
-    Bu site bir denemedir. @alperwn1903 tarafından geliştirilmiştir.
+
+  <!-- Siyah Footer Kutusu -->
+  <div class="footer-box">
+    Bu site bir denemedir. @alperwn1903 tarafından geliştirilmiştir.(yapayzekadan yardım alınmıştır!)
   </div>
+
+  <!-- Tema Geçiş Scripti -->
+  <script>
+    function temaDegistir() {
+      const body = document.body;
+      const buton = document.getElementById("temaButon");
+
+      body.classList.toggle("dark-mode");
+
+      if (body.classList.contains("dark-mode")) {
+        buton.innerText = "🌙";
+      } else {
+        buton.innerText = "🌞";
+      }
+    }
+  </script>
 
 </body>
 </html>
+
+
