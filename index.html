@@ -49,7 +49,6 @@
       margin-top: 40px;
     }
 
-    /* Video için ekstra stil */
     video {
       margin-top: 15px;
       max-width: 100%;
@@ -60,13 +59,15 @@
       padding-left: 20px;
     }
   </style>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
 </head>
 <body>
 
-  <!-- Tema Değiştirici Buton -->
   <button class="theme-toggle" onclick="temaDegistir()" id="temaButon">🌞</button>
 
-  <!-- Duyuru -->
   <h1>DUYURU!</h1>
   <h2>Merhaba!</h2>
   <p><b>@alperwn1903</b></p>
@@ -82,7 +83,6 @@
   <!-- Hesap Makinesi -->
   <section class="hesap-container">
     <h2>Hesap Makinesi</h2>
-
     <input type="text" id="sayi1" placeholder="1. Sayı">
     <select id="islem">
       <option value="+">+</option>
@@ -92,7 +92,6 @@
     </select>
     <input type="text" id="sayi2" placeholder="2. Sayı">
     <button onclick="hesapla()">Hesapla</button>
-
     <h3 id="sonuc"></h3>
   </section>
 
@@ -115,14 +114,9 @@
       else if (islem === "-") sonuc = sayi1 - sayi2;
       else if (islem === "*") sonuc = sayi1 * sayi2;
       else if (islem === "/") {
-        if (sayi2 === 0) {
-          sonuc = "Sıfıra bölünemez!";
-        } else {
-          sonuc = sayi1 / sayi2;
-        }
-      } else {
-        sonuc = "Geçersiz işlem!";
-      }
+        if (sayi2 === 0) sonuc = "Sıfıra bölünemez!";
+        else sonuc = sayi1 / sayi2;
+      } else sonuc = "Geçersiz işlem!";
 
       document.getElementById("sonuc").innerText = "Sonuç: " + sonuc;
     }
@@ -130,41 +124,59 @@
 
   <!-- İsim Listesi ve Video -->
   <section class="hesap-container">
-    <h2>isminizi girebilirsiniz :)</h2>
+    <h2>İsminizi girebilirsiniz :)</h2>
     <input type="text" id="nameInput" placeholder="İsminizi girin">
     <button onclick="addName()">Listeye Ekle</button>
 
     <ul id="nameList"></ul>
 
   <script>
+    // Firebase config (senin proje URL ve bilgilerinle)
+    const firebaseConfig = {
+      apiKey: "AIzaSyAWTZC_Tz3g8BOyqz13dXE0LLdnsJzkHaY",
+      authDomain: "alper-test1.firebaseapp.com",
+      databaseURL: "https://alper-test-1-default-rtdb.europe-west1.firebasedatabase.app",
+      projectId: "alper-test1",
+      storageBucket: "alper-test-1.firebasedatabase.app",
+      messagingSenderId: "487096572503",
+      appId: "1:487096572503:web:d8ca70ca0c4921dd3a2112"
+    };
+
+    // Firebase başlat
+    const app = firebase.initializeApp(firebaseConfig);
+    const database = firebase.database();
+    const nameList = document.getElementById('nameList');
+
+    // Firebase’den isimleri çek
+    firebase.database().ref('names').on('value', (snapshot) => {
+      nameList.innerHTML = '';
+      snapshot.forEach((child) => {
+        const li = document.createElement('li');
+        li.textContent = child.val();
+        nameList.appendChild(li);
+      });
+    });
+
     // İsim ekleme fonksiyonu
     function addName() {
       const input = document.getElementById('nameInput');
       const name = input.value.trim();
-
-      if (name) {
-        const li = document.createElement('li');
-        li.textContent = name;
-        document.getElementById('nameList').appendChild(li);
-        input.value = '';
-      }
+      if (!name) return;
+      firebase.database().ref('names').push(name);
+      input.value = '';
     }
 
     // Tema değiştirici
     function temaDegistir() {
       document.body.classList.toggle("dark-mode");
       const buton = document.getElementById("temaButon");
-      if (document.body.classList.contains("dark-mode")) {
-        buton.textContent = "🌙";
-      } else {
-        buton.textContent = "🌞";
-      }
+      if (document.body.classList.contains("dark-mode")) buton.textContent = "🌙";
+      else buton.textContent = "🌞";
     }
   </script>
 
-  <!-- Siyah Footer Kutusu -->
   <div class="footer-box">
-    Bu site bir denemedir. @alperwn1903 tarafından geliştirilmiştir.(yapayzekadan yardım alınmıştır!)
+    Bu site bir denemedir. @alperwn1903 tarafından geliştirilmiştir. (yapay zekadan yardım alınmıştır!)
   </div>
 
 </body>
